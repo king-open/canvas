@@ -9,27 +9,39 @@
 </head>
 
 <body>
-    <div id="canvas"></div>
+    <canvas id="canvas" width="100" height="200"></canvas>
     <script>
-        //先随便搞一个，错了再改。不是傻楞在那里
-        canvas.onclick = (e) => {
-            // 想得到自己想要的位置，技巧：鼠标移到左上角
-            console.log(e.clientX)
-            console.log(e.clientY)
-            /// console.log() 调式大法
-            let div = document.createElement('div') // 让文档创建一个标签
-            div.style.position = 'absolute'
-            div.style.left = e.clientX + 'px'
-            div.style.top = e.clientY + 'px'
-            // div.style.border = '1px solid red'
-            div.style.width = '6px'
-            div.style.height = '6px'
-            div.style.marginLeft = '-3px'
-            div.style.marginTop = '-3px'
-            div.style.borderRadius = '50%'
-            div.style.backgroundColor = 'black'
-            canvas.appendChild(div) // 意思是 append -> 添加 Child->孩子，让canvas添加一个div
+        let canvas = document.getElementById("canvas");
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+        // 获取canvas,把canvas宽度变成文档的宽度,把canvas 高度变成文档的高度
 
+        //画线
+        let ctx = canvas.getContext("2d");
+
+        let painting = false
+
+        ctx.fillStyle = "black"; // 填充样式 成这个颜色
+        ctx.strokeStyle = 'none'
+
+        canvas.onpointerdown = () => {
+            painting = true
+        }
+
+
+        canvas.onmousemove = (e) => {
+            if (painting === true) {
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill()
+            } else {
+                console.log('什么都不做')
+            }
+        }
+
+        canvas.onmouseup = () => {
+            painting = false
         }
     </script>
 </body>
