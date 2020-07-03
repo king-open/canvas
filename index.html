@@ -5,10 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>画板</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    hi
+    <div id="canvas"></div>
+    <script>
+        //先随便搞一个，错了再改。不是傻楞在那里
+        canvas.onclick = (e) => {
+            // 想得到自己想要的位置，技巧：鼠标移到左上角
+            console.log(e.clientX)
+            console.log(e.clientY)
+            /// console.log() 调式大法
+            let div = document.createElement('div') // 让文档创建一个标签
+            div.style.position = 'absolute'
+            div.style.left = e.clientX + 'px'
+            div.style.top = e.clientY + 'px'
+            // div.style.border = '1px solid red'
+            div.style.width = '6px'
+            div.style.height = '6px'
+            div.style.marginLeft = '-3px'
+            div.style.marginTop = '-3px'
+            div.style.borderRadius = '50%'
+            div.style.backgroundColor = 'black'
+            canvas.appendChild(div) // 意思是 append -> 添加 Child->孩子，让canvas添加一个div
+
+        }
+    </script>
 </body>
 
 </html>
